@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 
 // Neobrutalism 전용 볼드 아이콘 모음
 const Icons = {
@@ -280,14 +279,14 @@ export default function Home() {
             <div className="relative mb-5 group">
               <div className="w-[120px] h-[120px] rounded-full border-[3px] border-black bg-[#FFE600] flex items-center justify-center shadow-neo group-hover:scale-105 group-hover:rotate-3 transition-transform duration-200 overflow-hidden">
                 {!imgError ? (
-                  <Image
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
                     src="/profile.png"
                     alt="양민주 프로필 이미지"
                     width={120}
                     height={120}
                     className="w-full h-full object-cover rounded-full"
                     onError={() => setImgError(true)}
-                    priority
                   />
                 ) : (
                   <span className="text-4xl font-black text-black tracking-tight select-none">
