@@ -157,7 +157,7 @@ const TECH_STACK = [
 export default function Home() {
   const [isDark, setIsDark] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [imgError, setImgError] = useState(false);
+  const [imgError, setImgError] = useState(true);
 
   useEffect(() => {
     const isDarkMode =
