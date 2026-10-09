@@ -14,12 +14,12 @@ export default function Home() {
 
         {/* 소개 태그/상태 */}
         <span className="inline-block px-3 py-1 mb-4 text-xs font-medium text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-950/50 rounded-full">
-          대학생 · Vibe Coding
+          Junior Developer · Problem Solver
         </span>
 
         {/* 소개글 */}
         <p className="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed mb-6 break-keep">
-          안녕하세요! 바이브 코딩을 배우고 있는 대학생입니다.
+          사용자 중심의 가치를 코드로 구현하고 성장을 즐기는 개발자입니다. 새로운 기술을 탐구하며 더 나은 사용자 경험과 견고한 서비스를 만들어가고 있습니다.
         </p>
 
         {/* 심플 링크/버튼 영역 */}
