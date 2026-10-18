@@ -12,7 +12,9 @@
 - **시연(Demo) 전략**: 처음부터 서버나 복잡한 어드민을 구축하지 않고, **1단계로 LocalStorage 기반의 매력적인 프로필 페이지**를 완성하여 핵심 사용자 경험을 즉시 시연한 뒤, 점진적으로 에디터와 클라우드 DB를 확장
 
 ### 1.2 디자인 철학
-- **토스 디자인 시스템(TDS) 준수**: `design.md`에 명시된 토스 블루(`blue-500`), 그레이스케일, 둥근 모서리(24px 라운드 카드), 정돈된 타이포그래피, 부드러운 프레스 인터랙션 적용
+- **"shadcn/ui로 구현, TDS처럼 보이게"**: 이 프로젝트의 디자인 방향은 **shadcn/ui를 엔지니어링 기반**으로, **토스 디자인 시스템(TDS)을 시각적 목표**로 삼는다. shadcn/ui가 제공하는 컴포넌트 구조·접근성·Radix UI 기반 동작을 활용하되, 컴포넌트의 색상·타이포그래피·여백·모서리·그림자 등 모든 시각적 표현은 `design.md`에 정의된 TDS 규격을 따른다.
+- **shadcn/ui 컴포넌트 시스템**: 모든 UI 컴포넌트는 `npx shadcn@latest add <component>` 명령으로 추가하고, `src/components/ui/`에서 직접 소스를 수정하여 TDS 스타일로 커스터마이징한다.
+- **TDS 토큰으로 shadcn/ui 기본 테마 재정의**: shadcn/ui의 기본 CSS variables(`--primary`, `--radius`, `--border` 등)를 TDS 토큰(`design.md`의 토스 블루·그레이스케일·둥근 모서리·그림자 등)으로 덮어써서, shadcn/ui 컴포넌트가 기본 외관이 아닌 TDS 외관으로 렌더링되도록 한다. 토큰은 `globals.css`의 `@theme inline` 블록 및 `:root` / `.dark` 블록에서 관리한다.
 - **단일 모바일 셸(Shell)**: 데스크톱 화면에서도 모바일 디바이스 규격(최대 430px)의 깔끔한 중앙 셸 레이아웃 제공
 
 ---
@@ -208,13 +210,19 @@ flowchart TD
 ## 6. Phase 1 기술 스택 (Tech Stack)
 
 - **프레임워크**: `Next.js 15` (App Router), `React 19`, `TypeScript`
-- **스타일링**: `Tailwind CSS 3.4`, 토스 디자인 시스템(TDS) 토큰 명세 (`design.md`)
+- **스타일링**: `Tailwind CSS 4` + `@tailwindcss/postcss`
+  - CSS 설정은 `tailwind.config.ts` 파일 없이 `globals.css`의 `@theme inline` 블록에서 직접 관리
+- **UI 컴포넌트**: `shadcn/ui` (new-york 스타일, CSS variables 모드)
+  - `components.json`으로 설정 관리
+  - 컴포넌트는 `src/components/ui/`에 위치하며 소스 코드를 직접 수정 가능
+  - 핵심 유틸리티: `class-variance-authority`, `clsx`, `tailwind-merge`, `@radix-ui/react-slot`
+  - 아이콘: `lucide-react`
+- **디자인 토큰**: TDS 토큰(`--color-toss-*`, `--radius-tds-*`, `--shadow-tds-*`)을 shadcn/ui CSS variables 레이어 위에 통합 (`globals.css`)
 - **전역 상태 관리**: `Zustand` (또는 가벼운 커스텀 훅 `useLocalStorage`)
   - 테마 모드(라이트/다크)
   - 프로필 & 링크 데이터 로드
   - 토스트 및 바텀시트 모달 상태
 - **스토리지**: 브라우저 `window.localStorage` + `mockData.ts`
-- **아이콘**: Lucide 기반 24px TDS 스타일 커스텀 SVG 아이콘
 
 ---
 
