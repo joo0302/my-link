@@ -2,162 +2,162 @@
 
 import React, { useState, useEffect } from "react";
 
-// Neobrutalism 전용 볼드 아이콘 모음
-const Icons = {
+// TDS (Toss Design System) 사양에 맞춘 정갈한 24px 아이콘 세트 (Lucide 기반 1.75 stroke, round cap)
+const TDSIcons = {
   Github: () => (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
       <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
       />
     </svg>
   ),
   Blog: () => (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m-6 4h4" />
     </svg>
   ),
   Portfolio: () => (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+      <rect x="2" y="7" width="20" height="14" rx="3" strokeLinecap="round" strokeLinejoin="round" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
     </svg>
   ),
   Resume: () => (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="16" y1="13" x2="8" y2="13" strokeLinecap="round" />
+      <line x1="16" y1="17" x2="8" y2="17" strokeLinecap="round" />
+      <polyline points="10 9 9 9 8 9" strokeLinecap="round" />
     </svg>
   ),
   Mail: () => (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+      <rect width="20" height="16" x="2" y="4" rx="3" strokeLinecap="round" strokeLinejoin="round" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
     </svg>
   ),
   Copy: () => (
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+      <rect width="14" height="14" x="8" y="8" rx="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
     </svg>
   ),
   Share: () => (
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+      <circle cx="18" cy="5" r="3" />
+      <circle cx="6" cy="12" r="3" />
+      <circle cx="18" cy="19" r="3" />
+      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" strokeLinecap="round" />
+      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" strokeLinecap="round" />
     </svg>
   ),
   Sun: () => (
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+      <circle cx="12" cy="12" r="4" />
+      <path strokeLinecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41m14.14-14.14l-1.41 1.41" />
     </svg>
   ),
   Moon: () => (
-    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
     </svg>
   ),
-  ArrowRight: () => (
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+  ChevronRight: () => (
+    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
     </svg>
   ),
-  Sparkle: () => (
-    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" />
+  Check: () => (
+    <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  ),
+  Close: () => (
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  ),
+  External: () => (
+    <svg className="w-3.5 h-3.5 text-toss-grey-400 dark:text-toss-dark-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3" />
     </svg>
   ),
 };
 
-// 링크 목록 (Neobrutalism 팔레트)
+// 링크 목록 정의
 interface LinkItem {
   id: string;
   title: string;
-  description: string;
+  subtitle: string;
+  tag?: string;
   url: string;
-  badge: string;
-  badgeBg: string;
-  cardBg: string;
-  iconBg: string;
-  icon: keyof typeof Icons;
+  icon: keyof typeof TDSIcons;
   isExternal: boolean;
+  highlight?: boolean;
 }
 
 const LINKS: LinkItem[] = [
   {
+    id: "portfolio",
+    title: "프로젝트 포트폴리오",
+    subtitle: "직접 개발한 웹 서비스와 인터랙티브 데모 모음",
+    tag: "대표작",
+    url: "https://portfolio.example.com",
+    icon: "Portfolio",
+    isExternal: true,
+    highlight: true,
+  },
+  {
     id: "github",
-    title: "GitHub Profile",
-    description: "진행한 프로젝트 소스코드와 오픈소스 활동",
+    title: "GitHub 저장소",
+    subtitle: "프로젝트 소스 코드와 오픈소스 기여 활동",
     url: "https://github.com",
-    badge: "CODE",
-    badgeBg: "bg-white text-black",
-    cardBg: "bg-[#FFE600] dark:bg-yellow-500", // 비비드 옐로우
-    iconBg: "bg-white dark:bg-black text-black dark:text-white",
     icon: "Github",
     isExternal: true,
   },
   {
     id: "blog",
-    title: "Tech Blog (개발일지)",
-    description: "배운 지식과 트러블슈팅, 회고를 담은 기록",
+    title: "기술 블로그",
+    subtitle: "개발 트러블슈팅과 아키텍처 고민의 기록",
+    tag: "아티클",
     url: "https://velog.io",
-    badge: "BLOG",
-    badgeBg: "bg-black text-white",
-    cardBg: "bg-[#A3E635] dark:bg-lime-500", // 비비드 라임
-    iconBg: "bg-white dark:bg-black text-black dark:text-white",
     icon: "Blog",
     isExternal: true,
   },
   {
-    id: "portfolio",
-    title: "Projects Portfolio",
-    description: "직접 기획하고 만든 웹 애플리케이션 쇼케이스",
-    url: "https://portfolio.example.com",
-    badge: "FEATURED",
-    badgeBg: "bg-[#FFE600] text-black",
-    cardBg: "bg-[#38BDF8] dark:bg-sky-500", // 비비드 스카이블루
-    iconBg: "bg-white dark:bg-black text-black dark:text-white",
-    icon: "Portfolio",
-    isExternal: true,
-  },
-  {
     id: "resume",
-    title: "Resume & CV (이력서)",
-    description: "상세 기술 역량과 프로젝트 협업 경험 문서",
+    title: "이력서 및 경력기술서",
+    subtitle: "기술 역량, 프로젝트 경험, 협업 히스토리",
     url: "https://notion.so",
-    badge: "CAREER",
-    badgeBg: "bg-black text-white",
-    cardBg: "bg-[#FF70A6] dark:bg-pink-500", // 비비드 핑크
-    iconBg: "bg-white dark:bg-black text-black dark:text-white",
     icon: "Resume",
     isExternal: true,
   },
   {
     id: "contact",
-    title: "커피챗 & 협업 문의",
-    description: "가벼운 네트워킹과 새로운 기회는 언제나 환영해요",
+    title: "커피챗 및 협업 문의",
+    subtitle: "가벼운 네트워킹과 기회는 언제나 환영해요",
     url: "mailto:minju@example.com",
-    badge: "SAY HELLO",
-    badgeBg: "bg-white text-black",
-    cardBg: "bg-[#C084FC] dark:bg-purple-500", // 비비드 퍼플
-    iconBg: "bg-white dark:bg-black text-black dark:text-white",
     icon: "Mail",
     isExternal: false,
   },
 ];
 
-// 기술 스택 (Neobrutalism 스타일 배지)
-const TECH_STACK = [
-  { name: "React", bg: "bg-[#38BDF8] text-black" },
-  { name: "Next.js", bg: "bg-black text-white dark:bg-white dark:text-black" },
-  { name: "TypeScript", bg: "bg-[#60A5FA] text-black" },
-  { name: "JavaScript", bg: "bg-[#FFE600] text-black" },
-  { name: "Tailwind CSS", bg: "bg-[#2DD4BF] text-black" },
-  { name: "HTML5/CSS3", bg: "bg-[#FB923C] text-black" },
-  { name: "Git & GitHub", bg: "bg-[#F87171] text-black" },
-  { name: "Figma", bg: "bg-[#C084FC] text-black" },
+// 기술 스택 목록
+const TECH_STACKS = [
+  { category: "Core", items: ["React", "Next.js", "TypeScript", "JavaScript"] },
+  { category: "Styling & UI", items: ["Tailwind CSS", "Design System (TDS)", "Framer Motion"] },
+  { category: "Tools & Collaboration", items: ["Git & GitHub", "Figma", "VS Code"] },
 ];
 
 export default function Home() {
   const [isDark, setIsDark] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [imgError, setImgError] = useState(true);
+  const [isContactSheetOpen, setIsContactSheetOpen] = useState(false);
 
   useEffect(() => {
     const isDarkMode =
@@ -185,8 +185,8 @@ export default function Home() {
     }
   };
 
-  const showToast = (msg: string) => {
-    setToastMessage(msg);
+  const showToast = (message: string) => {
+    setToastMessage(message);
     setTimeout(() => {
       setToastMessage(null);
     }, 2400);
@@ -194,264 +194,347 @@ export default function Home() {
 
   const copyEmail = () => {
     navigator.clipboard.writeText("minju@example.com");
-    showToast("🎉 이메일 주소가 복사되었습니다!");
+    showToast("이메일 주소가 복사되었어요");
   };
 
   const handleShare = async () => {
+    const shareData = {
+      title: "양민주 | 프론트엔드 개발자",
+      text: "사용자 중심의 경험을 만드는 프론트엔드 개발자 양민주의 프로필 링크예요.",
+      url: window.location.href,
+    };
+
     if (navigator.share) {
       try {
-        await navigator.share({
-          title: "양민주 | Neobrutalist Profile",
-          text: "프론트엔드 개발자 양민주의 Neobrutalism 프로필 링크입니다.",
-          url: window.location.href,
-        });
+        await navigator.share(shareData);
       } catch {
-        // 무시
+        // 취소 처리
       }
     } else {
       navigator.clipboard.writeText(window.location.href);
-      showToast("🔗 링크가 복사되었습니다!");
+      showToast("프로필 링크가 복사되었어요");
     }
   };
 
   return (
-    <main className="min-h-screen relative bg-dot-pattern py-10 px-4 sm:px-6 flex flex-col items-center select-none">
-      {/* 토스트 알림 (Neobrutalism 스타일) */}
+    <div className="min-h-screen bg-toss-grey-50 dark:bg-toss-dark-bg text-toss-grey-900 dark:text-toss-dark-text flex flex-col items-center">
+      {/* TDS 스타일 정갈한 토스트 알림 */}
       {toastMessage && (
-        <div className="fixed top-6 z-50 px-5 py-3 rounded-xl border-[3px] border-black bg-[#FFE600] text-black font-black text-sm shadow-neo animate-bounce flex items-center gap-2">
-          <Icons.Sparkle />
-          <span>{toastMessage}</span>
+        <div className="fixed top-6 z-50 animate-in fade-in slide-in-from-top-3 duration-200">
+          <div className="bg-toss-grey-900 dark:bg-toss-dark-elevated text-white px-4 py-3 rounded-tds-l shadow-tds-toast flex items-center gap-2.5 text-[14px] font-medium border border-white/10">
+            <span className="w-5 h-5 rounded-full bg-toss-semantic-green flex items-center justify-center shrink-0">
+              <TDSIcons.Check />
+            </span>
+            <span>{toastMessage}</span>
+          </div>
         </div>
       )}
 
-      {/* 중앙 레이아웃 래퍼 */}
-      <div className="w-full max-w-md flex flex-col items-center">
-        {/* 상단 전광판 티커 (Marquee Bar) */}
-        <div className="w-full mb-6 overflow-hidden border-[3px] border-black dark:border-white bg-[#FFE600] dark:bg-yellow-400 text-black py-2 shadow-neo font-black text-xs uppercase tracking-wider rounded-xl">
-          <div className="flex whitespace-nowrap animate-marquee">
-            <span className="mx-3">✦ YANG MINJU</span>
-            <span className="mx-3">⚡ FRONTEND DEVELOPER</span>
-            <span className="mx-3">✿ LET&apos;S BUILD SOMETHING COOL</span>
-            <span className="mx-3">★ OPEN FOR COLLAB</span>
-            <span className="mx-3">✦ YANG MINJU</span>
-            <span className="mx-3">⚡ FRONTEND DEVELOPER</span>
-            <span className="mx-3">✿ LET&apos;S BUILD SOMETHING COOL</span>
-            <span className="mx-3">★ OPEN FOR COLLAB</span>
-          </div>
-        </div>
-
-        {/* 상단 네비게이션 / 유틸리티 바 */}
-        <div className="w-full flex justify-between items-center mb-6">
-          {/* 상태 배지 스티커 */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border-2 border-black dark:border-white bg-[#A3E635] text-black font-extrabold text-xs shadow-neo-sm -rotate-2 hover:rotate-0 transition-transform">
-            <span className="w-2.5 h-2.5 rounded-full bg-black animate-ping" />
-            <span>AVAILABLE FOR WORK 🟢</span>
+      {/* 중앙 단일 모바일 셸 (TDS 420px max-width) */}
+      <div className="w-full max-w-[430px] flex flex-col px-4 sm:px-5 pb-32 pt-2">
+        {/* 상단 앱바 (TDS TopBar, 56pt) */}
+        <header className="h-14 flex items-center justify-between py-2">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-toss-blue-500" />
+            <span className="text-[17px] font-bold tracking-tight text-toss-grey-900 dark:text-white">
+              양민주
+            </span>
           </div>
 
-          {/* 액션 버튼들 */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5">
             <button
               onClick={handleShare}
-              title="프로필 공유하기"
-              className="p-2.5 rounded-xl border-2 border-black dark:border-white bg-white dark:bg-neutral-800 text-black dark:text-white shadow-neo-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:translate-x-1 active:translate-y-1 transition-all"
+              aria-label="프로필 공유하기"
+              className="w-10 h-10 rounded-full flex items-center justify-center text-toss-grey-600 dark:text-toss-dark-subtext hover:bg-toss-grey-100 dark:hover:bg-toss-dark-surface transition-colors active:scale-95"
             >
-              <Icons.Share />
+              <TDSIcons.Share />
             </button>
             <button
               onClick={toggleTheme}
-              title={isDark ? "라이트 모드로 전환" : "다크 모드로 전환"}
-              className="p-2.5 rounded-xl border-2 border-black dark:border-white bg-[#38BDF8] text-black shadow-neo-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:translate-x-1 active:translate-y-1 transition-all"
+              aria-label={isDark ? "라이트 모드로 전환" : "다크 모드로 전환"}
+              className="w-10 h-10 rounded-full flex items-center justify-center text-toss-grey-600 dark:text-toss-dark-subtext hover:bg-toss-grey-100 dark:hover:bg-toss-dark-surface transition-colors active:scale-95"
             >
-              {isDark ? <Icons.Sun /> : <Icons.Moon />}
+              {isDark ? <TDSIcons.Sun /> : <TDSIcons.Moon />}
             </button>
           </div>
-        </div>
+        </header>
 
-        {/* 메인 프로필 카드 */}
-        <section className="w-full relative border-[3px] border-black dark:border-white bg-white dark:bg-neutral-900 rounded-2xl p-6 sm:p-7 shadow-neo-lg dark:shadow-neo-dark-lg mb-6 transition-all">
-          {/* 우측 상단 키치 스티커 */}
-          <div className="absolute -top-3.5 -right-2.5 px-3 py-1 rounded-lg border-2 border-black bg-[#FF70A6] text-black font-black text-xs shadow-neo-sm rotate-6 hover:rotate-12 transition-transform">
-            HELLO! 👾
-          </div>
-
+        {/* 메인 프로필 영역 (TDS 화이트 카드, 24px 라운드) */}
+        <section className="bg-white dark:bg-toss-dark-card rounded-tds-3xl p-6 sm:p-7 border border-toss-grey-200/80 dark:border-toss-dark-border shadow-tds-1 mt-2 mb-4">
           <div className="flex flex-col items-center text-center">
-            {/* 아바타 영역 (원형 120x120 Neobrutalism 스타일) */}
-            <div className="relative mb-5 group">
-              <div className="w-[120px] h-[120px] rounded-full border-[3px] border-black bg-[#FFE600] flex items-center justify-center shadow-neo group-hover:scale-105 group-hover:rotate-3 transition-transform duration-200 overflow-hidden">
-                {!imgError ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src="/profile.png"
-                    alt="양민주 프로필 이미지"
-                    width={120}
-                    height={120}
-                    className="w-full h-full object-cover rounded-full"
-                    onError={() => setImgError(true)}
-                  />
-                ) : (
-                  <span className="text-4xl font-black text-black tracking-tight select-none">
-                    MJ.
-                  </span>
-                )}
+            {/* 아바타 영역: 토스 특유의 차분한 원형 아바타 */}
+            <div className="relative mb-4">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-b from-toss-blue-50 to-toss-blue-100 dark:from-toss-dark-elevated dark:to-toss-dark-surface flex items-center justify-center border border-toss-grey-200/60 dark:border-toss-dark-border overflow-hidden">
+                <span className="text-2xl font-bold text-toss-blue-500 dark:text-toss-dark-blue select-none">
+                  MJ
+                </span>
               </div>
-              <div className="absolute bottom-0 right-0 px-2.5 py-0.5 rounded-full border-2 border-black bg-[#A3E635] text-[11px] font-black text-black shadow-neo-sm">
-                DEV
-              </div>
+              <span className="absolute bottom-0 right-0 w-5 h-5 rounded-full bg-toss-semantic-green border-2 border-white dark:border-toss-dark-card flex items-center justify-center" title="대화 가능" />
             </div>
 
-            {/* 이름 및 직무 */}
-            <div className="space-y-1 mb-3">
-              <h1 className="text-3xl sm:text-4xl font-black text-black dark:text-white tracking-tight">
-                양민주
-              </h1>
-              <p className="text-sm font-bold text-neutral-600 dark:text-neutral-400 font-mono">
-                @minju.yang · Frontend Developer
+            {/* 타이틀 및 소개 카피 (해요체 가이드라인) */}
+            <h1 className="text-[24px] font-bold text-toss-grey-900 dark:text-white tracking-tight leading-snug">
+              양민주
+            </h1>
+            <p className="text-[15px] font-medium text-toss-grey-600 dark:text-toss-dark-subtext mt-1">
+              Frontend Developer
+            </p>
+
+            {/* 상태 뱃지 풀 필 (TDS chip 스타일) */}
+            <div className="mt-3.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-tds-full bg-toss-blue-50 dark:bg-toss-dark-blueWeak text-toss-blue-500 dark:text-toss-dark-blue text-[13px] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-toss-blue-500" />
+              <span>새로운 기회와 커피챗을 기다려요</span>
+            </div>
+
+            {/* 소개 문구 (TDS 해요체 톤앤매너) */}
+            <div className="w-full mt-5 pt-4 border-t border-toss-grey-100 dark:border-toss-dark-border text-left">
+              <p className="text-[15px] leading-relaxed text-toss-grey-700 dark:text-toss-dark-subtext break-keep">
+                복잡한 비즈니스 로직을 사용자가 직관적으로 이해할 수 있는 정갈한 UI로 풉니다. 세밀한 인터랙션과 완성도 높은 디자인 시스템 구축을 좋아해요.
               </p>
             </div>
 
-            {/* 키워드 태그 뱃지 */}
-            <div className="flex flex-wrap justify-center gap-2 mb-4">
-              <span className="px-2.5 py-1 text-xs font-black rounded-lg border-2 border-black bg-[#FFE600] text-black shadow-neo-sm">
-                💻 FRONTEND
-              </span>
-              <span className="px-2.5 py-1 text-xs font-black rounded-lg border-2 border-black bg-[#38BDF8] text-black shadow-neo-sm">
-                ⚡ UI / UX
-              </span>
-              <span className="px-2.5 py-1 text-xs font-black rounded-lg border-2 border-black bg-[#A3E635] text-black shadow-neo-sm">
-                ✿ PROBLEM SOLVER
-              </span>
-            </div>
-
-            {/* 소개 문구 (박스 하이라이트) */}
-            <div className="w-full p-3.5 rounded-xl border-2 border-black dark:border-neutral-700 bg-[#FFFDF5] dark:bg-neutral-800 text-left text-xs sm:text-sm font-medium text-neutral-800 dark:text-neutral-200 leading-relaxed mb-5 shadow-neo-sm break-keep">
-              <p>
-                사용자 중심의 경험을 굵직하고 매력적인 코드로 구현합니다. 새로운 기술 스택을 탐구하고 즐겁게 협업하는 개발자입니다.
-              </p>
-            </div>
-
-            {/* 빠른 액션 버튼 2종 */}
-            <div className="w-full flex gap-3 font-black text-xs sm:text-sm">
+            {/* 보조 액션 버튼 (TDS button-secondary 2단) */}
+            <div className="w-full grid grid-cols-2 gap-2 mt-5">
               <button
                 onClick={copyEmail}
-                className="flex-1 py-3 px-4 rounded-xl border-2 border-black bg-[#FFE600] hover:bg-yellow-300 text-black shadow-neo hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-neo-sm active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2"
+                className="h-10 px-3 rounded-tds-m bg-toss-grey-100 dark:bg-toss-dark-surface hover:bg-toss-grey-200 dark:hover:bg-toss-dark-elevated text-toss-grey-900 dark:text-white text-[14px] font-semibold transition-colors active:scale-[0.98] flex items-center justify-center gap-1.5"
               >
-                <Icons.Copy />
+                <TDSIcons.Copy />
                 <span>이메일 복사</span>
               </button>
-              <a
-                href="mailto:minju@example.com"
-                className="py-3 px-5 rounded-xl border-2 border-black bg-white dark:bg-neutral-800 hover:bg-neutral-100 text-black dark:text-white shadow-neo hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-neo-sm active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2"
+              <button
+                onClick={() => setIsContactSheetOpen(true)}
+                className="h-10 px-3 rounded-tds-m bg-toss-grey-100 dark:bg-toss-dark-surface hover:bg-toss-grey-200 dark:hover:bg-toss-dark-elevated text-toss-grey-900 dark:text-white text-[14px] font-semibold transition-colors active:scale-[0.98] flex items-center justify-center gap-1.5"
               >
-                <Icons.Mail />
-                <span>메일 쓰기</span>
-              </a>
+                <TDSIcons.Mail />
+                <span>연락처 보기</span>
+              </button>
             </div>
           </div>
         </section>
 
-        {/* 링크 카드 영역 */}
-        <section className="w-full space-y-3.5 mb-8">
-          <div className="flex items-center justify-between px-1 mb-1">
-            <h2 className="text-xs font-black tracking-wider uppercase text-black dark:text-white flex items-center gap-1.5">
-              <span>📌 FEATURED LINKS</span>
-            </h2>
-            <span className="text-[11px] font-black px-2 py-0.5 rounded-md border-2 border-black bg-[#FF70A6] text-black shadow-neo-sm">
-              {LINKS.length} LINKS
-            </span>
+        {/* 숫자 통계 하이라이트 (TDS Tabular Figure 적용) */}
+        <section className="bg-white dark:bg-toss-dark-card rounded-tds-2xl p-4 border border-toss-grey-200/80 dark:border-toss-dark-border shadow-tds-1 mb-4">
+          <div className="grid grid-cols-3 divide-x divide-toss-grey-200/80 dark:divide-toss-dark-border text-center">
+            <div className="px-2 py-1">
+              <div className="text-[20px] font-bold text-toss-grey-900 dark:text-white tabular-nums tracking-tight">
+                3+<span className="text-[13px] font-medium text-toss-grey-500 ml-0.5">년</span>
+              </div>
+              <div className="text-[12px] font-medium text-toss-grey-500 dark:text-toss-dark-muted mt-0.5">
+                개발 경험
+              </div>
+            </div>
+            <div className="px-2 py-1">
+              <div className="text-[20px] font-bold text-toss-blue-500 dark:text-toss-dark-blue tabular-nums tracking-tight">
+                12+<span className="text-[13px] font-medium text-toss-grey-500 ml-0.5">개</span>
+              </div>
+              <div className="text-[12px] font-medium text-toss-grey-500 dark:text-toss-dark-muted mt-0.5">
+                완료 프로젝트
+              </div>
+            </div>
+            <div className="px-2 py-1">
+              <div className="text-[20px] font-bold text-toss-grey-900 dark:text-white tabular-nums tracking-tight">
+                99<span className="text-[13px] font-medium text-toss-grey-500 ml-0.5">%</span>
+              </div>
+              <div className="text-[12px] font-medium text-toss-grey-500 dark:text-toss-dark-muted mt-0.5">
+                만족도
+              </div>
+            </div>
           </div>
-
-          {LINKS.map((link) => {
-            const IconComponent = Icons[link.icon] || Icons.Portfolio;
-            return (
-              <a
-                key={link.id}
-                href={link.url}
-                target={link.isExternal ? "_blank" : undefined}
-                rel={link.isExternal ? "noopener noreferrer" : undefined}
-                className={`group w-full p-4 rounded-2xl border-[3px] border-black dark:border-white ${link.cardBg} shadow-neo dark:shadow-neo-dark hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-neo-sm dark:hover:shadow-neo-dark-sm active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-150 flex items-center justify-between gap-3 text-left`}
-              >
-                <div className="flex items-center gap-3.5 min-w-0">
-                  {/* 아이콘 박스 */}
-                  <div
-                    className={`w-12 h-12 rounded-xl border-2 border-black ${link.iconBg} flex items-center justify-center shrink-0 shadow-neo-sm group-hover:rotate-6 transition-transform`}
-                  >
-                    <IconComponent />
-                  </div>
-
-                  {/* 텍스트 내용 */}
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-black text-sm sm:text-base text-black dark:text-neutral-900 truncate">
-                        {link.title}
-                      </h3>
-                      <span
-                        className={`text-[9px] font-black px-1.5 py-0.5 rounded border border-black shadow-neo-sm shrink-0 ${link.badgeBg}`}
-                      >
-                        {link.badge}
-                      </span>
-                    </div>
-                    <p className="text-xs font-semibold text-black/80 dark:text-neutral-900/80 truncate mt-0.5">
-                      {link.description}
-                    </p>
-                  </div>
-                </div>
-
-                {/* 우측 화살표 버튼 */}
-                <div className="w-9 h-9 rounded-xl border-2 border-black bg-white text-black flex items-center justify-center shrink-0 shadow-neo-sm group-hover:translate-x-1 transition-transform">
-                  <Icons.ArrowRight />
-                </div>
-              </a>
-            );
-          })}
         </section>
 
-        {/* 기술 스택 섹션 */}
-        <section className="w-full border-[3px] border-black dark:border-white bg-white dark:bg-neutral-900 rounded-2xl p-6 shadow-neo-lg dark:shadow-neo-dark-lg mb-8">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-black text-black dark:text-white uppercase flex items-center gap-1.5">
-              <span>🛠️ TECH STACK</span>
-            </h3>
-            <span className="text-[10px] font-black px-2 py-0.5 rounded border border-black bg-[#FFE600] text-black shadow-neo-sm">
-              EXPERTISE
+        {/* 주요 링크 섹션 (TDS ListRow 패턴) */}
+        <section className="space-y-2 mb-4">
+          <div className="px-1 py-1 flex items-center justify-between">
+            <h2 className="text-[15px] font-bold text-toss-grey-900 dark:text-white">
+              바로가기
+            </h2>
+            <span className="text-[13px] font-medium text-toss-grey-500 dark:text-toss-dark-muted tabular-nums">
+              전체 {LINKS.length}개
             </span>
           </div>
-          <p className="text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-4">
-            주로 다루며 문제 해결에 활용하는 개발 기술입니다.
-          </p>
 
-          <div className="flex flex-wrap gap-2.5">
-            {TECH_STACK.map((tech) => (
-              <span
-                key={tech.name}
-                className={`text-xs font-black px-3 py-1.5 rounded-xl border-2 border-black shadow-neo-sm hover:scale-105 active:scale-95 transition-transform cursor-default ${tech.bg}`}
-              >
-                {tech.name}
-              </span>
+          <div className="bg-white dark:bg-toss-dark-card rounded-tds-3xl border border-toss-grey-200/80 dark:border-toss-dark-border shadow-tds-1 overflow-hidden divide-y divide-toss-grey-100 dark:divide-toss-dark-border">
+            {LINKS.map((link) => {
+              const IconComp = TDSIcons[link.icon] || TDSIcons.Portfolio;
+              return (
+                <a
+                  key={link.id}
+                  href={link.url}
+                  target={link.isExternal ? "_blank" : undefined}
+                  rel={link.isExternal ? "noopener noreferrer" : undefined}
+                  className="w-full px-5 py-4 flex items-center justify-between gap-3 text-left hover:bg-toss-grey-50 dark:hover:bg-toss-dark-surface active:bg-toss-grey-100 dark:active:bg-toss-dark-elevated transition-colors duration-150 group"
+                >
+                  <div className="flex items-center gap-3.5 min-w-0">
+                    {/* TDS 44px 둥근 아이콘 컨테이너 */}
+                    <div
+                      className={`w-11 h-11 rounded-tds-l flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
+                        link.highlight
+                          ? "bg-toss-blue-50 dark:bg-toss-dark-blueWeak text-toss-blue-500 dark:text-toss-dark-blue"
+                          : "bg-toss-grey-100 dark:bg-toss-dark-surface text-toss-grey-700 dark:text-toss-dark-subtext"
+                      }`}
+                    >
+                      <IconComp />
+                    </div>
+
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[16px] font-semibold text-toss-grey-900 dark:text-white truncate">
+                          {link.title}
+                        </span>
+                        {link.tag && (
+                          <span className="text-[11px] font-bold px-1.5 py-0.5 rounded-tds-xs bg-toss-blue-50 dark:bg-toss-dark-blueWeak text-toss-blue-500 dark:text-toss-dark-blue">
+                            {link.tag}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[13px] text-toss-grey-500 dark:text-toss-dark-muted truncate mt-0.5">
+                        {link.subtitle}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="shrink-0 flex items-center pl-1 text-toss-grey-400 dark:text-toss-dark-muted group-hover:text-toss-grey-700 dark:group-hover:text-white group-hover:translate-x-0.5 transition-all">
+                    {link.isExternal ? <TDSIcons.ChevronRight /> : <TDSIcons.ChevronRight />}
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* 기술 역량 섹션 (TDS 카드 & 정돈된 칩) */}
+        <section className="bg-white dark:bg-toss-dark-card rounded-tds-3xl p-5 sm:p-6 border border-toss-grey-200/80 dark:border-toss-dark-border shadow-tds-1 mb-4">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-[16px] font-bold text-toss-grey-900 dark:text-white">
+              보유 기술
+            </h2>
+            <span className="text-[13px] font-medium text-toss-blue-500 dark:text-toss-dark-blue">
+              주요 스택
+            </span>
+          </div>
+
+          <div className="space-y-3.5">
+            {TECH_STACKS.map((group) => (
+              <div key={group.category}>
+                <span className="text-[12px] font-semibold text-toss-grey-500 dark:text-toss-dark-muted mb-2 block">
+                  {group.category}
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1.5 rounded-tds-m bg-toss-grey-100 dark:bg-toss-dark-surface text-toss-grey-800 dark:text-toss-dark-subtext text-[13px] font-medium hover:bg-toss-grey-200 dark:hover:bg-toss-dark-elevated transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </section>
 
-        {/* 현재 집중 분야 (Current Focus) 카드 */}
-        <section className="w-full border-[3px] border-black dark:border-white bg-[#FFE600] dark:bg-yellow-500 text-black rounded-2xl p-5 shadow-neo-lg dark:shadow-neo-dark-lg mb-8">
-          <div className="flex items-center gap-1.5 font-black text-sm mb-2">
-            <Icons.Sparkle />
-            <span>CURRENT FOCUS</span>
+        {/* 일하는 방식 / 핵심 가치 (TDS 인포 카드) */}
+        <section className="bg-white dark:bg-toss-dark-card rounded-tds-3xl p-5 sm:p-6 border border-toss-grey-200/80 dark:border-toss-dark-border shadow-tds-1 mb-6">
+          <h2 className="text-[16px] font-bold text-toss-grey-900 dark:text-white mb-3">
+            협업할 때 중요하게 생각해요
+          </h2>
+          <div className="space-y-3">
+            <div className="flex items-start gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-toss-blue-500 mt-2 shrink-0" />
+              <p className="text-[14px] text-toss-grey-700 dark:text-toss-dark-subtext leading-relaxed">
+                <strong className="text-toss-grey-900 dark:text-white font-semibold">단순하고 명확한 UX:</strong> 불필요한 단계를 줄이고 사용자가 고민하지 않는 동선을 지향해요.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-toss-blue-500 mt-2 shrink-0" />
+              <p className="text-[14px] text-toss-grey-700 dark:text-toss-dark-subtext leading-relaxed">
+                <strong className="text-toss-grey-900 dark:text-white font-semibold">재사용 가능한 컴포넌트:</strong> 레고 블록처럼 유연하고 일관된 디자인 시스템을 만듭니다.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-toss-blue-500 mt-2 shrink-0" />
+              <p className="text-[14px] text-toss-grey-700 dark:text-toss-dark-subtext leading-relaxed">
+                <strong className="text-toss-grey-900 dark:text-white font-semibold">열린 소통과 신뢰:</strong> 문제를 빠르게 공유하고 동료의 관점에 귀 기울여 함께 성장해요.
+              </p>
+            </div>
           </div>
-          <p className="text-xs sm:text-sm font-bold leading-relaxed break-keep">
-            Next.js App Router 생태계와 인터랙티브 웹 디자인, 그리고 높은 완성도의 UI 컴포넌트 시스템 구축에 몰입하고 있습니다.
-          </p>
         </section>
 
         {/* 푸터 영역 */}
-        <footer className="w-full text-center py-4 space-y-2 text-xs font-black text-black dark:text-white">
-          <div className="inline-block px-3 py-1 rounded-lg border-2 border-black bg-white dark:bg-neutral-800 shadow-neo-sm">
-            © 2026 YANG MINJU · ALL RIGHTS RESERVED
-          </div>
-          <p className="text-[11px] font-mono text-neutral-500 dark:text-neutral-400">
-            CRAFTED WITH NEOBRUTALISM STYLE ⚡
+        <footer className="text-center py-6 text-toss-grey-500 dark:text-toss-dark-muted text-[12px] space-y-1">
+          <p>© 2026 양민주 · Toss Design System 기반 제작</p>
+          <p className="text-[11px] text-toss-grey-400 dark:text-toss-dark-divider">
+            designed with TDS guidelines
           </p>
         </footer>
       </div>
-    </main>
+
+      {/* TDS 바텀시트 (Bottom Sheet: 연락처 & 커피챗 안내) */}
+      {isContactSheetOpen && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center">
+          {/* 스크림 (Overlay Scrim) */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-[2px] transition-opacity"
+            onClick={() => setIsContactSheetOpen(false)}
+          />
+
+          {/* 시트 컨테이너 */}
+          <div className="relative w-full max-w-[430px] bg-white dark:bg-toss-dark-card rounded-t-tds-3xl p-6 shadow-tds-sheet z-10 animate-in slide-in-from-bottom duration-250">
+            {/* 드래그 핸들 바 */}
+            <div className="w-10 h-1 bg-toss-grey-300 dark:bg-toss-dark-border rounded-full mx-auto mb-5" />
+
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-[18px] font-bold text-toss-grey-900 dark:text-white">
+                커피챗 제안하기
+              </h3>
+              <button
+                onClick={() => setIsContactSheetOpen(false)}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-toss-grey-500 hover:bg-toss-grey-100 dark:hover:bg-toss-dark-surface"
+              >
+                <TDSIcons.Close />
+              </button>
+            </div>
+
+            <p className="text-[14px] text-toss-grey-600 dark:text-toss-dark-subtext mb-5 leading-relaxed">
+              가벼운 커피챗부터 프로젝트 협업, 포지션 제안까지 언제든 편하게 연락 주세요. 보통 24시간 안에 답변드려요.
+            </p>
+
+            <div className="space-y-2.5">
+              <a
+                href="mailto:minju@example.com"
+                className="w-full h-12 rounded-tds-l bg-toss-blue-500 hover:bg-toss-blue-600 text-white font-bold text-[15px] flex items-center justify-center gap-2 transition-colors"
+              >
+                <TDSIcons.Mail />
+                <span>메일 앱에서 작성하기</span>
+              </a>
+              <button
+                onClick={() => {
+                  copyEmail();
+                  setIsContactSheetOpen(false);
+                }}
+                className="w-full h-12 rounded-tds-l bg-toss-grey-100 dark:bg-toss-dark-surface hover:bg-toss-grey-200 dark:hover:bg-toss-dark-elevated text-toss-grey-900 dark:text-white font-semibold text-[15px] flex items-center justify-center gap-2 transition-colors"
+              >
+                <TDSIcons.Copy />
+                <span>이메일 주소 복사하기</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TDS 화면 최하단 고정 액션바 (BottomCTA: 56pt + 위쪽 보호 그라디언트) */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 flex justify-center pointer-events-none">
+        <div className="w-full max-w-[430px] px-4 pb-5 pt-6 bg-gradient-to-t from-toss-grey-50 via-toss-grey-50/90 to-transparent dark:from-toss-dark-bg dark:via-toss-dark-bg/90 pointer-events-auto">
+          <button
+            onClick={() => setIsContactSheetOpen(true)}
+            className="w-full h-14 rounded-tds-xl bg-toss-blue-500 hover:bg-toss-blue-600 active:bg-toss-blue-700 text-white font-bold text-[17px] shadow-tds-2 transition-all active:scale-[0.985] flex items-center justify-center gap-2"
+          >
+            <span>함께 일하기 · 커피챗 제안</span>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

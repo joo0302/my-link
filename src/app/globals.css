@@ -1,47 +1,59 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #fef08a;
-  --foreground: #000000;
+  --background: #F9FAFB;
+  --foreground: #191F28;
+  --surface-card: #FFFFFF;
+  --surface-secondary: #F2F4F6;
+  --border-line: #E5E8EB;
 }
 
 .dark {
-  --background: #121316;
-  --foreground: #ffffff;
+  --background: #101012;
+  --foreground: #FFFFFF;
+  --surface-card: #202027;
+  --surface-secondary: #2C2C35;
+  --border-line: #32323D;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, "Pretendard Variable", Pretendard, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  letter-spacing: -0.015em;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.2s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
   overflow-x: hidden;
 }
 
-.bg-dot-pattern {
-  background-color: #fef08a;
-  background-image: radial-gradient(#000000 1.2px, transparent 1.2px);
-  background-size: 20px 20px;
-}
-
-.dark .bg-dot-pattern {
-  background-image: radial-gradient(#ffffff 1.2px, transparent 1.2px);
-  background-size: 20px 20px;
+/* Tabular numbers for financial/date/metric stats in TDS */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(156, 163, 175, 0.4);
+  background: rgba(156, 163, 175, 0.3);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(156, 163, 175, 0.6);
+  background: rgba(156, 163, 175, 0.5);
 }
