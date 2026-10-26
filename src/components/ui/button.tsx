@@ -10,8 +10,12 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-toss-blue-500 text-white font-bold hover:bg-toss-blue-600 active:bg-toss-blue-700 shadow-tds-1",
+        primary:
+          "bg-toss-blue-500 text-white font-bold hover:bg-toss-blue-600 active:bg-toss-blue-700 shadow-tds-1",
         secondary:
           "bg-toss-grey-100 dark:bg-toss-dark-surface hover:bg-toss-grey-200 dark:hover:bg-toss-dark-elevated text-toss-grey-900 dark:text-white font-semibold",
+        danger:
+          "bg-toss-semantic-red text-white font-bold hover:opacity-90 active:scale-[0.985]",
         ghost:
           "hover:bg-toss-grey-100 dark:hover:bg-toss-dark-surface text-toss-grey-700 dark:text-toss-dark-subtext",
         outline:
@@ -20,9 +24,13 @@ const buttonVariants = cva(
           "bg-toss-blue-50 dark:bg-toss-dark-blueWeak text-toss-blue-500 dark:text-toss-dark-blue font-semibold hover:bg-toss-blue-100",
       },
       size: {
-        default: "h-10 px-4 py-2 rounded-tds-m text-[14px]",
-        sm: "h-8 px-3 rounded-tds-s text-[12px]",
-        lg: "h-14 px-6 rounded-tds-xl text-[16px] font-bold",
+        default: "h-10 px-4 py-2 rounded-tds-m text-[15px] font-semibold", // TDS M (40px)
+        xl: "h-14 px-6 rounded-tds-xl text-[17px] font-bold", // TDS XL (56px)
+        l: "h-12 px-5 rounded-tds-l text-[17px] font-bold", // TDS L (48px)
+        m: "h-10 px-4 rounded-tds-m text-[15px] font-semibold", // TDS M (40px)
+        s: "h-8 px-3 rounded-tds-s text-[13px] font-semibold", // TDS S (32px)
+        sm: "h-8 px-3 rounded-tds-s text-[13px] font-semibold", // TDS S
+        lg: "h-14 px-6 rounded-tds-xl text-[17px] font-bold", // TDS XL
         icon: "h-10 w-10 rounded-full p-0 shrink-0",
       },
     },
