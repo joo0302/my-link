@@ -1,0 +1,121 @@
+{
+  "profile": {
+    "name": "양민주",
+    "jobTitle": "Frontend Developer",
+    "initials": "MJ",
+    "avatarUrl": "",
+    "badge": "새로운 기회와 커피챗을 기다려요",
+    "bio": "복잡한 비즈니스 로직을 사용자가 직관적으로 이해할 수 있는 정갈한 UI로 풉니다. 세밀한 인터랙션과 완성도 높은 디자인 시스템 구축을 좋아해요.",
+    "email": "minju@example.com"
+  },
+  "socials": [
+    {
+      "platform": "github",
+      "url": "https://github.com/yangminju"
+    },
+    {
+      "platform": "blog",
+      "url": "https://velog.io/@minju"
+    },
+    {
+      "platform": "linkedin",
+      "url": "https://linkedin.com/in/minju-yang"
+    },
+    {
+      "platform": "mail",
+      "url": "mailto:minju@example.com"
+    }
+  ],
+  "links": [
+    {
+      "id": "link-1",
+      "title": "프로젝트 포트폴리오",
+      "subtitle": "직접 설계하고 개발한 웹 서비스 및 인터랙티브 인터페이스 모음",
+      "tag": "대표작",
+      "category": "featured",
+      "url": "https://portfolio.example.com",
+      "icon": "Portfolio",
+      "highlight": true,
+      "isExternal": true,
+      "isActive": true,
+      "clicks": 1420,
+      "order": 1,
+      "createdAt": "2026-01-15T09:00:00Z"
+    },
+    {
+      "id": "link-2",
+      "title": "GitHub 오픈소스 저장소",
+      "subtitle": "디자인 시스템 컴포넌트 라이브러리 및 개인 사이드 프로젝트 소스",
+      "tag": "Open Source",
+      "category": "project",
+      "url": "https://github.com/yangminju",
+      "icon": "Github",
+      "highlight": false,
+      "isExternal": true,
+      "isActive": true,
+      "clicks": 892,
+      "order": 2,
+      "createdAt": "2026-02-01T11:30:00Z"
+    },
+    {
+      "id": "link-3",
+      "title": "기술 블로그 (Tech Log)",
+      "subtitle": "성능 최적화, 웹 접근성, 토스 디자인 시스템(TDS) 구현기",
+      "tag": "Weekly",
+      "category": "content",
+      "url": "https://velog.io/@minju",
+      "icon": "Blog",
+      "highlight": false,
+      "isExternal": true,
+      "isActive": true,
+      "clicks": 654,
+      "order": 3,
+      "createdAt": "2026-02-18T14:20:00Z"
+    },
+    {
+      "id": "link-4",
+      "title": "이력서 및 경력기술서",
+      "subtitle": "역할별 핵심 성과, 기술 스택, 팀 협업 히스토리",
+      "tag": "Updated",
+      "category": "career",
+      "url": "https://notion.so/minju/resume",
+      "icon": "Resume",
+      "highlight": false,
+      "isExternal": true,
+      "isActive": true,
+      "clicks": 431,
+      "order": 4,
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "id": "link-5",
+      "title": "Figma 디자인 시스템 규격서",
+      "subtitle": "TDS 기반 토큰 체계, 컬러 팔레트, 모바일 컴포넌트 가이드",
+      "tag": "Design",
+      "category": "project",
+      "url": "https://figma.com/@minju/design-system",
+      "icon": "Figma",
+      "highlight": false,
+      "isExternal": true,
+      "isActive": true,
+      "clicks": 312,
+      "order": 5,
+      "createdAt": "2026-03-20T16:45:00Z"
+    },
+    {
+      "id": "link-6",
+      "title": "커피챗 및 협업 문의",
+      "subtitle": "가벼운 네트워킹과 커피챗, 프로젝트 제안은 언제나 환영해요",
+      "tag": "Coffee Chat",
+      "category": "contact",
+      "url": "mailto:minju@example.com",
+      "icon": "Mail",
+      "highlight": false,
+      "isExternal": false,
+      "isActive": true,
+      "clicks": 185,
+      "order": 6,
+      "createdAt": "2026-04-01T08:00:00Z"
+    }
+  ]
+}
