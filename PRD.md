@@ -95,12 +95,18 @@ flowchart TD
 > - 서버/Firebase 통신 및 사용자 로그인/회원가입  
 > - 일별 클릭/방문자 통계 차트 대시보드  
 
-### 4.1 로컬 데이터 스토리지 (Data Layer)
-1. **기본 Mock 데이터 (Default Seed)**
-   - 최초 실행 시 브라우저 LocalStorage에 데이터가 없을 경우, 기본 프로필 및 링크 데이터를 자동으로 초기 로드
-2. **LocalStorage 영속성 (Persistence)**
+### 4.1 로컬 데이터 스토리지 및 Mock API (Data Layer)
+1. **정적 Mock 데이터 파일 (`src/data/links.json`)**
+   - 프로필 정보, 소셜 링크, 6개 대표 링크 목록(포트폴리오, 오픈소스, 기술블로그, 이력서, Figma 디자인 시스템, 커피챗)을 담은 단일 정적 소스 파일
+2. **로컬 시딩 및 영속성 (Default Seed & Persistence)**
+   - 최초 실행 시 브라우저 LocalStorage에 데이터가 없을 경우, `src/data/links.json` 기반의 기본 데이터를 자동으로 초기 로드
    - LocalStorage의 `mylink_profile_data` 키에서 프로필 정보를 읽어 화면을 렌더링
    - 사용자가 테마를 변경하거나 LocalStorage 값을 수정하면 즉시 화면에 반영
+3. **백엔드 Mock API 엔드포인트 (Next.js Route Handlers)**
+   - `GET /api/links`: 링크 목록 조회 (카테고리/하이라이트/키워드 필터링 지원)
+   - `POST /api/links`: 신규 링크 등록 시뮬레이션
+   - `GET /api/profile`: 프로필 + 소셜 + 링크 전체 조회
+   - 표준 REST Envelope 구조(`success`, `statusCode`, `message`, `data`, `meta`)를 채택하여 추후 Phase 3 BaaS/백엔드 전환 시 프론트엔드 연동 변경 최소화
 
 ### 4.2 공개 프로필 페이지 구성 (Profile Page UX)
 
@@ -149,9 +155,11 @@ flowchart TD
 
 ---
 
-## 5. Phase 1 로컬스토리지 데이터 구조 (Data Schema)
+## 5. Phase 1 로컬스토리지 및 Mock API 데이터 구조 (Data Schema)
 
-브라우저의 `localStorage.getItem("mylink_profile_data")`에 저장되는 데이터 스펙:
+기본 더미 데이터는 [`src/data/links.json`](file:///e:/myLink_minju/mylink/src/data/links.json)에 정의되어 있으며, 브라우저의 `localStorage.getItem("mylink_profile_data")` 및 Mock API 응답의 기반 데이터로 사용됩니다.
+
+### 5.1 프로필 및 링크 스키마 (`src/types/link.ts`)
 
 ```json
 {
@@ -165,43 +173,121 @@ flowchart TD
     "email": "minju@example.com"
   },
   "socials": [
-    { "platform": "github", "url": "https://github.com" },
-    { "platform": "blog", "url": "https://velog.io" },
+    { "platform": "github", "url": "https://github.com/yangminju" },
+    { "platform": "blog", "url": "https://velog.io/@minju" },
+    { "platform": "linkedin", "url": "https://linkedin.com/in/minju-yang" },
     { "platform": "mail", "url": "mailto:minju@example.com" }
   ],
   "links": [
     {
-      "id": "portfolio",
+      "id": "link-1",
       "title": "프로젝트 포트폴리오",
-      "subtitle": "직접 개발한 웹 서비스와 인터랙티브 데모 모음",
+      "subtitle": "직접 설계하고 개발한 웹 서비스 및 인터랙티브 인터페이스 모음",
       "tag": "대표작",
+      "category": "featured",
       "url": "https://portfolio.example.com",
       "icon": "Portfolio",
-      "highlight": true
+      "highlight": true,
+      "isExternal": true,
+      "isActive": true,
+      "clicks": 1420,
+      "order": 1,
+      "createdAt": "2026-01-15T09:00:00Z"
     },
     {
-      "id": "github",
-      "title": "GitHub 저장소",
-      "subtitle": "프로젝트 소스 코드와 오픈소스 기여 활동",
-      "url": "https://github.com",
-      "icon": "Github"
+      "id": "link-2",
+      "title": "GitHub 오픈소스 저장소",
+      "subtitle": "디자인 시스템 컴포넌트 라이브러리 및 개인 사이드 프로젝트 소스",
+      "tag": "Open Source",
+      "category": "project",
+      "url": "https://github.com/yangminju",
+      "icon": "Github",
+      "highlight": false,
+      "isExternal": true,
+      "isActive": true,
+      "clicks": 892,
+      "order": 2,
+      "createdAt": "2026-02-01T11:30:00Z"
     },
     {
-      "id": "blog",
-      "title": "기술 블로그",
-      "subtitle": "개발 트러블슈팅과 아키텍처 고민의 기록",
-      "tag": "아티클",
-      "url": "https://velog.io",
-      "icon": "Blog"
+      "id": "link-3",
+      "title": "기술 블로그 (Tech Log)",
+      "subtitle": "성능 최적화, 웹 접근성, 토스 디자인 시스템(TDS) 구현기",
+      "tag": "Weekly",
+      "category": "content",
+      "url": "https://velog.io/@minju",
+      "icon": "Blog",
+      "highlight": false,
+      "isExternal": true,
+      "isActive": true,
+      "clicks": 654,
+      "order": 3,
+      "createdAt": "2026-02-18T14:20:00Z"
     },
     {
-      "id": "resume",
+      "id": "link-4",
       "title": "이력서 및 경력기술서",
-      "subtitle": "기술 역량, 프로젝트 경험, 협업 히스토리",
-      "url": "https://notion.so",
-      "icon": "Resume"
+      "subtitle": "역할별 핵심 성과, 기술 스택, 팀 협업 히스토리",
+      "tag": "Updated",
+      "category": "career",
+      "url": "https://notion.so/minju/resume",
+      "icon": "Resume",
+      "highlight": false,
+      "isExternal": true,
+      "isActive": true,
+      "clicks": 431,
+      "order": 4,
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "id": "link-5",
+      "title": "Figma 디자인 시스템 규격서",
+      "subtitle": "TDS 기반 토큰 체계, 컬러 팔레트, 모바일 컴포넌트 가이드",
+      "tag": "Design",
+      "category": "project",
+      "url": "https://figma.com/@minju/design-system",
+      "icon": "Figma",
+      "highlight": false,
+      "isExternal": true,
+      "isActive": true,
+      "clicks": 312,
+      "order": 5,
+      "createdAt": "2026-03-20T16:45:00Z"
+    },
+    {
+      "id": "link-6",
+      "title": "커피챗 및 협업 문의",
+      "subtitle": "가벼운 네트워킹과 커피챗, 프로젝트 제안은 언제나 환영해요",
+      "tag": "Coffee Chat",
+      "category": "contact",
+      "url": "mailto:minju@example.com",
+      "icon": "Mail",
+      "highlight": false,
+      "isExternal": false,
+      "isActive": true,
+      "clicks": 185,
+      "order": 6,
+      "createdAt": "2026-04-01T08:00:00Z"
     }
   ]
+}
+```
+
+### 5.2 백엔드 Mock API 응답 규격 (`ApiResponse<T>`)
+
+```typescript
+interface ApiResponse<T> {
+  success: boolean;       // 성공 여부
+  statusCode: number;    // HTTP 상태 코드
+  message: string;       // 응답 메시지
+  data: T;               // 실제 페이로드 데이터
+  meta?: {               // 페이지네이션 및 타임스탬프 메타데이터
+    total: number;
+    page?: number;
+    limit?: number;
+    hasMore?: boolean;
+    timestamp: string;
+  };
 }
 ```
 
@@ -222,7 +308,7 @@ flowchart TD
   - 테마 모드(라이트/다크)
   - 프로필 & 링크 데이터 로드
   - 토스트 및 바텀시트 모달 상태
-- **스토리지**: 브라우저 `window.localStorage` + `mockData.ts`
+- **스토리지 및 데이터 레이어**: 브라우저 `window.localStorage` + 정적 데이터(`src/data/links.json`) + Mock 데이터 헬퍼(`src/lib/mockData.ts`) + Next.js Route Handlers (`/api/links`, `/api/profile`)
 
 ---
 
