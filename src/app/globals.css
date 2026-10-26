@@ -63,6 +63,23 @@
   --color-toss-green: #04B064;
   --color-toss-orange: #FF8800;
   --color-toss-yellow: #FFC342;
+  --color-toss-semantic-red: #F04452;
+  --color-toss-semantic-green: #04B064;
+  --color-toss-semantic-orange: #FF8800;
+  --color-toss-semantic-yellow: #FFC342;
+
+  /* Toss Design System — Dark tokens */
+  --color-toss-dark-bg: #101012;
+  --color-toss-dark-surface: #1C1C22;
+  --color-toss-dark-card: #202027;
+  --color-toss-dark-elevated: #2C2C35;
+  --color-toss-dark-border: #32323D;
+  --color-toss-dark-divider: #26262E;
+  --color-toss-dark-text: #FFFFFF;
+  --color-toss-dark-subtext: #A6A6B0;
+  --color-toss-dark-muted: #6B6B78;
+  --color-toss-dark-blue: #3485FA;
+  --color-toss-dark-blueWeak: #1E2A42;
 
   /* Toss Design System — Border Radius */
   --radius-tds-xs: 4px;
