@@ -82,9 +82,10 @@ function getLinkIcon(iconName: IconType | string) {
 interface LinkListProps {
   links: LinkItem[];
   onLinkClick: (id: string) => void;
+  onAddLink?: () => void;
 }
 
-export function LinkList({ links, onLinkClick }: LinkListProps) {
+export function LinkList({ links, onLinkClick, onAddLink }: LinkListProps) {
   const activeLinks = [...links]
     .filter((item) => item.isActive !== false)
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
@@ -95,12 +96,40 @@ export function LinkList({ links, onLinkClick }: LinkListProps) {
         <h2 className="text-[15px] font-bold text-toss-grey-900 dark:text-white">
           바로가기
         </h2>
-        <span className="text-[13px] font-medium text-toss-grey-500 dark:text-toss-dark-muted tabular-nums">
-          전체 {activeLinks.length}개
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-[13px] font-medium text-toss-grey-500 dark:text-toss-dark-muted tabular-nums">
+            전체 {activeLinks.length}개
+          </span>
+          {onAddLink && (
+            <button
+              type="button"
+              onClick={onAddLink}
+              aria-label="링크 추가"
+              className="flex items-center gap-1 text-[13px] font-semibold text-toss-blue-500 hover:text-toss-blue-600 transition-colors px-2 py-1 rounded-tds-s hover:bg-toss-blue-50 dark:hover:bg-toss-dark-blueWeak/30"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
+              </svg>
+              추가
+            </button>
+          )}
+        </div>
       </div>
 
       <Card className="overflow-hidden divide-y divide-toss-grey-100 dark:divide-toss-dark-border">
+        {activeLinks.length === 0 && (
+          <div className="py-12 flex flex-col items-center gap-3 text-center px-6">
+            <div className="w-12 h-12 rounded-full bg-toss-grey-100 dark:bg-toss-dark-surface flex items-center justify-center">
+              <svg className="w-6 h-6 text-toss-grey-400 dark:text-toss-dark-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-[14px] font-semibold text-toss-grey-700 dark:text-toss-dark-subtext">아직 링크가 없어요</p>
+              <p className="text-[12px] text-toss-grey-400 dark:text-toss-dark-muted mt-0.5">위의 추가 버튼으로 링크를 등록해보세요</p>
+            </div>
+          </div>
+        )}
         {activeLinks.map((link) => {
           const IconComp = getLinkIcon(link.icon);
           const isMail = link.url.startsWith("mailto:");

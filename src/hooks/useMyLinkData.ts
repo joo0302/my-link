@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { MyLinkData } from "@/types/link";
+import { MyLinkData, LinkItem } from "@/types/link";
 import { MOCK_MYLINK_DATA, LOCAL_STORAGE_KEY } from "@/lib/mockData";
 
 export function useMyLinkData() {
@@ -58,6 +58,28 @@ export function useMyLinkData() {
     });
   }, []);
 
+  // 새 링크 추가 및 로컬스토리지 동기화
+  const addLink = useCallback((newLink: Omit<LinkItem, "id" | "createdAt" | "clicks" | "order">) => {
+    setData((prev) => {
+      const maxOrder = prev.links.reduce((max, l) => Math.max(max, l.order ?? 0), 0);
+      const link: LinkItem = {
+        ...newLink,
+        id: `link-${Date.now()}`,
+        clicks: 0,
+        order: maxOrder + 1,
+        createdAt: new Date().toISOString(),
+        isActive: true,
+      };
+      const nextData: MyLinkData = { ...prev, links: [...prev.links, link] };
+      try {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(nextData));
+      } catch (e) {
+        console.warn("링크 저장 실패:", e);
+      }
+      return nextData;
+    });
+  }, []);
+
   return {
     data,
     profile: data.profile,
@@ -65,5 +87,6 @@ export function useMyLinkData() {
     links: data.links,
     isLoaded,
     recordClick,
+    addLink,
   };
 }

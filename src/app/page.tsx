@@ -7,6 +7,7 @@ import { ProfileHeader } from "@/components/ProfileHeader";
 import { SocialBar } from "@/components/SocialBar";
 import { LinkList } from "@/components/LinkList";
 import { ContactBottomSheet } from "@/components/ContactBottomSheet";
+import { AddLinkDialog } from "@/components/AddLinkDialog";
 
 // 상단 앱바 전용 아이콘
 const TopBarIcons = {
@@ -38,10 +39,11 @@ const TopBarIcons = {
 };
 
 export default function Home() {
-  const { profile, socials, links, recordClick } = useMyLinkData();
+  const { profile, socials, links, recordClick, addLink } = useMyLinkData();
   const [isDark, setIsDark] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isContactSheetOpen, setIsContactSheetOpen] = useState(false);
+  const [isAddLinkOpen, setIsAddLinkOpen] = useState(false);
 
   // 다크모드 초기화
   useEffect(() => {
@@ -159,7 +161,7 @@ export default function Home() {
         <SocialBar socials={socials} />
 
         {/* 3. 재사용 가능한 링크 목록 (Card, Badge 기반) */}
-        <LinkList links={links} onLinkClick={recordClick} />
+        <LinkList links={links} onLinkClick={recordClick} onAddLink={() => setIsAddLinkOpen(true)} />
 
         {/* 푸터 영역 */}
         <footer className="text-center py-6 text-toss-grey-500 dark:text-toss-dark-muted text-[12px] space-y-1">
@@ -176,6 +178,16 @@ export default function Home() {
         onOpenChange={setIsContactSheetOpen}
         email={profile.email}
         onCopyEmail={copyEmail}
+      />
+
+      {/* 5. 링크 추가 다이얼로그 */}
+      <AddLinkDialog
+        isOpen={isAddLinkOpen}
+        onOpenChange={setIsAddLinkOpen}
+        onAdd={(link) => {
+          addLink(link);
+          showToast("새 링크가 추가되었어요 🎉");
+        }}
       />
 
       {/* 화면 최하단 고정 플로팅 액션바 (BottomCTA: Button lg 기반) */}
